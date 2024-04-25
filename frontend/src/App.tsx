@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Home from "./components/home/index";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/router/privateRoute";
@@ -7,8 +6,6 @@ import AdminAuthPage from "./components/admin/admin_auth";
 import AdminPage from "./components/admin/admin_lk";
 import PrivateRouteAdminAuth from "./utils/router/privateRouteAdmin"
 import UserPage from "./components/user/lk";
-import RegisterPage from "./components/user/auth/register";
-import axios from "axios";
 
 function App() {
     return (
