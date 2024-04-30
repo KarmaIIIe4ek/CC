@@ -6,25 +6,35 @@ import AdminAuthPage from "./components/admin/admin_auth";
 import AdminPage from "./components/admin/admin_lk";
 import PrivateRouteAdminAuth from "./utils/router/privateRouteAdmin"
 import UserPage from "./components/user/lk";
+import {ColorModeContext, useMode} from "./theme"
+import { ThemeProvider, CssBaseline } from "@mui/material";
 
 function App() {
+    const [theme, colorMode] = useMode()
     return (
-        <div className="app">
-            <Routes>
-                <Route path="/" element={<Home />}/>
-                
-                <Route path="user/login" element={<AuthRootComponent />}/>
-                <Route path="user/register" element={<AuthRootComponent />}/>
-                <Route path="admin/login" element={<AdminAuthPage />} />
-                <Route element={<PrivateRoute />}>
-                    <Route path="user/lk" element={<UserPage />}/>
-                </Route>
-                <Route element={<PrivateRouteAdminAuth />}>
-                    <Route path="admin/lk" element={<AdminPage />}/>
-                </Route>
-                
-                </Routes>
-        </div>
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <div className="App">
+                <Routes>
+                    <Route path="/" element={<Home />}/>
+                    
+                    <Route path="user/login" element={<AuthRootComponent />}/>
+                    <Route path="user/register" element={<AuthRootComponent />}/>
+                    <Route path="admin/login" element={<AdminAuthPage />} />
+                    <Route element={<PrivateRoute />}>
+                        <Route path="user/lk" element={<UserPage />}/>
+                    </Route>
+                    <Route element={<PrivateRouteAdminAuth />}>
+                        <Route path="admin/lk" element={<AdminPage />}/>
+                    </Route>
+                    
+                    </Routes>
+                </div>
+            </ThemeProvider>
+            
+        </ColorModeContext.Provider>
+        
     );
 }
 

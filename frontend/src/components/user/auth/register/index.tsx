@@ -4,7 +4,7 @@ import { IPropsRegister } from "../../../../common/types/auth";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
     
-    const {setEmail, setPassword, setRepeatPassword} = props;
+    const {setEmail, setPassword, setRepeatPassword, navigate} = props;
     return (
         <>
             <Typography variant="h2" fontFamily='Poppins' textAlign='center'>
@@ -18,7 +18,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
             <TextField fullWidth={true} type='password' margin="normal" id="outlined-basic" label="Repeet Password" variant="outlined" placeholder="Повторите пароль" onChange={(e) => setRepeatPassword(e.target.value)}/>
             <Button type="submit" sx={{fontFamily:'Poppins', marginTop: 2, width: '60%'}} variant="contained" onClick={() => {}}>Регистрация</Button>
             <Typography variant="body1" sx={{fontFamily:'Poppins'}}>
-                У вас уже есть аккаунт? <span className="incitingText">Войти</span>
+                У вас уже есть аккаунт? <span className="incitingText" onClick={() => navigate("/user/login")}>Войти</span>
             </Typography>
         </>
     );
