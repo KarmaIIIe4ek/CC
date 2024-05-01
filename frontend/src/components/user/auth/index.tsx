@@ -65,7 +65,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     
 
     return(
-        <div className={'root'}>
+        <div className='root'>
             <form className="form" onSubmit={handleSubmit}>
                 <Box
                     display='flex'

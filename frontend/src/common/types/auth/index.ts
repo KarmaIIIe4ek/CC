@@ -17,5 +17,7 @@ export interface IAuthState {
 }
 
 export interface IPublicUser{
+    email: string,
+    password: string,
     token: string,
 }

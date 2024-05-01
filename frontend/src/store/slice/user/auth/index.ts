@@ -3,6 +3,8 @@ import { IAuthState } from "../../../../common/types/auth"
 
 const initialState: IAuthState = {
     user: {
+        email: '',
+        password: '',
         token: ''
     },
     isLogged: false
