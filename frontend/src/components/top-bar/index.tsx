@@ -21,8 +21,7 @@ const TopBarComponent = (props: any) => {
             <Box className={classes.root}>
                 <MenuOutlined
                 className={classes.menuIcon}
-                onClick={() => setSideBarIsOpen(!sideBarIsOpen)}
-                />
+                onClick={() => setSideBarIsOpen(!sideBarIsOpen)}/>
                 <Grid>Welcome  {user ? `${user.email}` : ''}</Grid>
                 <Box display='flex'>
                     <Grid className={classes.icons}>
