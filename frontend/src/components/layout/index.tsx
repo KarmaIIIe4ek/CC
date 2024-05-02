@@ -5,13 +5,17 @@ import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import SideBarComponent from "../sidebar";
+import { useStyles } from "./styles";
 
 const LayoutComponent = ({children} : ILayout) => {
     const [sideBarIsOpen, setSideBarIsOpen] = useState(true)
     const isNonMobile = useMediaQuery('(min-width:600px)')
     const location = useLocation()
+    const classes = useStyles()
     return (
-        location.pathname === '/' ? (
+        location.pathname === '/user/login' || location.pathname === '/user/register' ? (
+            <>{children}</>
+        ) : (
             <Box display={isNonMobile ? 'flex' : 'block'} width='100%' height='100%'>
                 <SideBarComponent
                     isNonMobile={isNonMobile}
@@ -19,13 +23,11 @@ const LayoutComponent = ({children} : ILayout) => {
                     sideBarIsOpen={sideBarIsOpen}
                     setSideBarIsOpen={setSideBarIsOpen}
                 />
-                <Box>
-                    <TopBarComponent/>
+                <Box className={classes.mainSection} >
+                    <TopBarComponent setSideBarIsOpen={setSideBarIsOpen} sideBarIsOpen={sideBarIsOpen} isNonMobile={isNonMobile}/>
                     {children}
                 </Box>
             </Box>
-        ) : (
-            <>{children}</>
         )
     )
 }

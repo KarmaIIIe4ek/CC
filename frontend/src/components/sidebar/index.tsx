@@ -13,9 +13,11 @@ import {
     useTheme,
 } from '@mui/material'
 import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material'
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import FlexBetween from "../flex-between";
+import { navMenu } from "../../common/moks/navigete";
+import CC from "../../assets/images/sidebar/CC.png"
 
 const SideBarComponent = (props: any) => {
     const [active, setActive] = useState('')
@@ -24,10 +26,28 @@ const SideBarComponent = (props: any) => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
         setActive(pathname.substring(1))
     }, [pathname])
+
+    const renderNavMenu = navMenu.map((element): JSX.Element => {
+        return (
+            <ListItem key={element.id}>
+                <ListItemButton className={classes.navItem} onClick={() => navigate(`${element.path}`)}>
+                    <ListItemIcon>
+                        {element.icon}
+                    </ListItemIcon>
+                    <ListItemText>
+                        <Typography variant="body1">
+                            {element.name}
+                        </Typography>
+                    </ListItemText>
+                </ListItemButton>
+            </ListItem>
+        )
+    })
 
     return (
         <Box component='nav'>
@@ -47,11 +67,20 @@ const SideBarComponent = (props: any) => {
                         }
                     }}
                 >
-                    <Box width='100%'>
+                    <Box width='100%' sx={{
+                        borderBottom: `1px solid ${colors.borderColor}`
+                    }}
+                    >
                         <Box>
                             <FlexBetween>
-                                <Box display='flex' alignItems='center' gap='10px'>
-                                    <Typography>Demo</Typography>
+                                <Box className={classes.brand} onClick={() => navigate('user/lk')}>
+                                    <img src={CC} alt="Logo image"/>
+                                    <Typography 
+                                    variant='h2' 
+                                    color={theme.palette.mode === 'dark' ? colors.white.DEFAULT : colors.black.DEFAULT}
+                                    >
+                                        CoinsCheck
+                                        </Typography>
                                 </Box>
                                 {!isNonMobile && (
                                     <IconButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>
@@ -60,11 +89,31 @@ const SideBarComponent = (props: any) => {
                                 )}
                             </FlexBetween>
                         </Box>
+                        <List
+                            sx={{
+                                marginBottom:'55px',
+                            }}
+                        >
+                            {renderNavMenu}
+                        </List>
+                    </Box>
+                    <Box width='100%'>
+                        <List>
+                            <ListItem>
+                                <ListItemButton className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <LogoutOutlined />
+                                    </ListItemIcon>
+                                    <ListItemIcon>
+                                        <Typography>Выйти</Typography>
+                                    </ListItemIcon>
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
                     </Box>
                 </Drawer>
                     
             )}
-            <h1>This is sideBar</h1>
         </Box>
     )
 }

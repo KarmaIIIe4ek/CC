@@ -6,22 +6,30 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 import { ColorModeContext, tokens } from "../../theme";
+import { useStyles } from "./styles";
+import { MenuOutlined } from "@mui/icons-material";
 
-const TopBarComponent = () => {
+const TopBarComponent = (props: any) => {
+    const { setSideBarIsOpen, sideBarIsOpen, isNonMobile } = props
     const user = useAppSelector(state => state.auth.user)
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const colorMode = useContext(ColorModeContext)
+    const classes = useStyles()
     return (
         <>
-            <Box display='flex' justifyContent='space-between' px="32px" py="16px" bgcolor={colors.accentMain}>
-                <Grid>Welcome {user.email}</Grid>
+            <Box className={classes.root}>
+                <MenuOutlined
+                className={classes.menuIcon}
+                onClick={() => setSideBarIsOpen(!sideBarIsOpen)}
+                />
+                <Grid>Welcome  {user ? `${user.email}` : ''}</Grid>
                 <Box display='flex'>
                     <IconButton sx={{mr: '15px'}}>
                         <NotificationsNoneIcon/>
                     </IconButton>
-                    <Grid onClick={colorMode.toggleColorMode}>
-                        <IconButton >
+                    <Grid onClick={colorMode.toggleColorMode} sx={{pr: '20px'}}>
+                        <IconButton className={classes.themeIcon}>
                             {theme.palette.mode === 'dark' ? (<DarkModeIcon/>) : (<LightModeIcon/>)}
                         </IconButton>
                         

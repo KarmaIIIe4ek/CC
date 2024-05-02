@@ -1,9 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { IPropsLogin } from "../../../../common/types/auth";
+import { useTheme } from "@mui/styles";
+import { tokens } from "../../../../theme";
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-
+    const theme = useTheme()
     const {setEmail, setPassword, navigate} = props;
     return (
         <>

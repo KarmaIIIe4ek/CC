@@ -9,6 +9,9 @@ import UserPage from "./components/lk";
 import {ColorModeContext, useMode} from "./theme"
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import LayoutComponent from "./components/layout";
+import NewsComponent from "./components/news";
+import SettingsComponent from "./components/settings";
+import SubscribeComponent from "./components/subscribe";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -26,6 +29,9 @@ function App() {
                         <Route path="admin/login" element={<AdminAuthPage />} />
                         <Route element={<PrivateRoute />}>
                             <Route path="user/lk" element={<UserPage />}/>
+                            <Route path="user/lk/subscribe" element={<SubscribeComponent />}/>
+                            <Route path="user/lk/news" element={<NewsComponent />}/>
+                            <Route path="user/lk/settings" element={<SettingsComponent />}/>
                         </Route>
                         <Route element={<PrivateRouteAdminAuth />}>
                             <Route path="admin/lk" element={<AdminPage />}/>

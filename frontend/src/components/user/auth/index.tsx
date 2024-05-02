@@ -3,11 +3,12 @@ import { Route, useLocation, useNavigate } from "react-router-dom";
 import RegisterPage from "./register";
 import LoginPage from "./login";
 import './style.scss'
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { instance } from "../../../utils/axios";
 import { useAppDispatch } from "../../../utils/hook";
 import { login } from "../../../store/slice/user/auth";
 import { AppErrors } from "../../../common/errors";
+import { tokens } from "../../../theme";
 
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
@@ -19,6 +20,8 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const apiUrlLoggin = "auth/sign-in"
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
     
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
@@ -77,6 +80,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     padding={3}
                     borderRadius={5}
                     boxShadow={'5px 5px 10px #ccc'}
+                    bgcolor={colors.primary[500]}
                 >
                     {(location.pathname === '/user/login')
                      ? <LoginPage setEmail={setEmail} setPassword={setPassword} navigate={navigate}/> : (location.pathname === '/user/register')
