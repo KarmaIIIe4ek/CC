@@ -67,18 +67,12 @@ const SideBarComponent = (props: any) => {
                         }
                     }}
                 >
-                    <Box width='100%' sx={{
-                        borderBottom: `1px solid ${colors.borderColor}`
-                    }}
-                    >
+                    <Box className={classes.root}>
                         <Box>
                             <FlexBetween>
                                 <Box className={classes.brand} onClick={() => navigate('user/lk')}>
                                     <img src={CC} alt="Logo image"/>
-                                    <Typography 
-                                    variant='h2' 
-                                    color={theme.palette.mode === 'dark' ? colors.white.DEFAULT : colors.black.DEFAULT}
-                                    >
+                                    <Typography variant='h4' className={classes.brandTitle}>
                                         CoinsCheck
                                         </Typography>
                                 </Box>
@@ -89,11 +83,7 @@ const SideBarComponent = (props: any) => {
                                 )}
                             </FlexBetween>
                         </Box>
-                        <List
-                            sx={{
-                                marginBottom:'55px',
-                            }}
-                        >
+                        <List className={classes.menu}>
                             {renderNavMenu}
                         </List>
                     </Box>

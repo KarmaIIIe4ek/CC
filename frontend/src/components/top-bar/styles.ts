@@ -9,7 +9,16 @@ export const useStyles = makeStyles((theme: Theme) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '24px 24px',
+            padding: '14px 24px',
+            backgroundColor: colors.primary.DEFAULT,
+            maxHeight: '95px',
+            borderBottom: `1px solid ${colors.borderColor}`,
+        },
+        icons: {
+            paddingRight: '20px',
+        },
+        notificationIcon: {
+            marginRight: '15px !important',
         },
         themeIcon: {
             marginRight: '20px',

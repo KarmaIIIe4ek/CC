@@ -25,15 +25,13 @@ const TopBarComponent = (props: any) => {
                 />
                 <Grid>Welcome  {user ? `${user.email}` : ''}</Grid>
                 <Box display='flex'>
-                    <IconButton sx={{mr: '15px'}}>
-                        <NotificationsNoneIcon/>
-                    </IconButton>
-                    <Grid onClick={colorMode.toggleColorMode} sx={{pr: '20px'}}>
-                        <IconButton className={classes.themeIcon}>
+                    <Grid className={classes.icons}>
+                        <IconButton className={classes.notificationIcon}>
+                            <NotificationsNoneIcon/>
+                        </IconButton>
+                        <IconButton className={classes.themeIcon} onClick={colorMode.toggleColorMode}>
                             {theme.palette.mode === 'dark' ? (<DarkModeIcon/>) : (<LightModeIcon/>)}
                         </IconButton>
-                        
-
                     </Grid>
                 </Box>
             </Box>
