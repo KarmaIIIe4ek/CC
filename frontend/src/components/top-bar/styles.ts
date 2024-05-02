@@ -6,13 +6,13 @@ export const useStyles = makeStyles((theme: Theme) => {
     const colors = tokens(theme.palette.mode)
     return {
         root: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '14px 24px',
-            backgroundColor: colors.primary.DEFAULT,
-            maxHeight: '95px',
+            background: `${colors.primary.DEFAULT} !important`,
             borderBottom: `1px solid ${colors.borderColor}`,
+            boxShadow: 'none !important',
+        },
+        toolbar: {
+            justifyContent: 'spase-between',
+            padding: '10px 25px',
         },
         icons: {
             paddingRight: '20px',

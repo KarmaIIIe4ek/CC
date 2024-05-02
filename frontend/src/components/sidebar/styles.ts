@@ -25,13 +25,13 @@ export const useStyles = makeStyles((theme: Theme) => {
         navItem: {
             '&:hover':{
                 backgroundColor: '#1900D5 !important',
-                color: "#FFFFFF",
+                color: "#FFFFFF !important",
                 borderRadius: '4px',
                 '& .MuiSvgIcon-root': {
                     color: `${colors.white.DEFAULT}`,
                 },
-            }
-        }
+            },
+        },
     
     })
 })

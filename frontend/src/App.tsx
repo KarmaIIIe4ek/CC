@@ -19,28 +19,28 @@ function App() {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <LayoutComponent>
                     <div className="App">
                     <Routes>
-                        <Route path="/" element={<Home />}/>
+                        <Route element={<LayoutComponent/ >}>
+                            <Route path="/" element={<Home />}/>
+                            
+                            <Route path="user/login" element={<AuthRootComponent />}/>
+                            <Route path="user/register" element={<AuthRootComponent />}/>
+                            <Route path="admin/login" element={<AdminAuthPage />} />
+                            <Route element={<PrivateRoute />}>
+                                <Route path="user/lk" element={<UserPage />}/>
+                                <Route path="user/lk/subscribe" element={<SubscribeComponent />}/>
+                                <Route path="user/lk/news" element={<NewsComponent />}/>
+                                <Route path="user/lk/settings" element={<SettingsComponent />}/>
+                            </Route>
+                            <Route element={<PrivateRouteAdminAuth />}>
+                                <Route path="admin/lk" element={<AdminPage />}/>
+                            </Route>
+                        </Route>
                         
-                        <Route path="user/login" element={<AuthRootComponent />}/>
-                        <Route path="user/register" element={<AuthRootComponent />}/>
-                        <Route path="admin/login" element={<AdminAuthPage />} />
-                        <Route element={<PrivateRoute />}>
-                            <Route path="user/lk" element={<UserPage />}/>
-                            <Route path="user/lk/subscribe" element={<SubscribeComponent />}/>
-                            <Route path="user/lk/news" element={<NewsComponent />}/>
-                            <Route path="user/lk/settings" element={<SettingsComponent />}/>
-                        </Route>
-                        <Route element={<PrivateRouteAdminAuth />}>
-                            <Route path="admin/lk" element={<AdminPage />}/>
-                        </Route>
                         
                         </Routes>
                     </div>
-                </LayoutComponent>
-                
             </ThemeProvider>
             
         </ColorModeContext.Provider>
