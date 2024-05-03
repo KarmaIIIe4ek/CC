@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../../utils/hook";
 import { login } from "../../../store/slice/user/auth";
 import { AppErrors } from "../../../common/errors";
 import { tokens } from "../../../theme";
+import { useForm } from "react-hook-form";
 
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
@@ -22,15 +23,22 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const navigate = useNavigate()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault()
+    const {
+        register,
+        formState: {
+            errors
+        },
+        handleSubmit,
+    } = useForm()
+
+    const handleSubmitForm = async (data: any) => {
         if (location.pathname === "/user/login") {
             try {
                 const userData = {
-                    email,
-                    password,
+                    email: data.email,
+                    password: data.password,
                 }
+                
                 const user = await instance.post(apiUrlLoggin, userData)
                 await dispatch(login(user.data))
                 navigate('/user/lk')
@@ -44,8 +52,8 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
             if (password === repeatPassword) {
                 try {
                     const userData = {
-                        email,
-                        password,
+                        email: data.email,
+                        password: data.password,
                     }
                     const createUser = await instance.post(apiUrlCreate, userData)
                     const user = await instance.post(apiUrlLoggin, userData)
@@ -55,8 +63,6 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     console.log(err)
                     return err
                 }
-                
-                
             }
             else {
                 throw new Error(AppErrors.PasswordDoNotMatch)
@@ -69,7 +75,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
 
     return(
         <div className='root'>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display='flex'
                     justifyContent='center'
@@ -83,7 +89,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     bgcolor={colors.primary[500]}
                 >
                     {(location.pathname === '/user/login')
-                     ? <LoginPage setEmail={setEmail} setPassword={setPassword} navigate={navigate}/> : (location.pathname === '/user/register')
+                     ? <LoginPage navigate={navigate} register={register} errors={errors}/> : (location.pathname === '/user/register')
                       ? <RegisterPage setEmail={setEmail} setPassword={setPassword} setRepeatPassword={setRepeatPassword} navigate={navigate}/> : null
                       }
                 </Box>
