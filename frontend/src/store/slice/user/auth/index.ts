@@ -7,7 +7,8 @@ const initialState: IAuthState = {
         password: '',
         token: ''
     },
-    isLogged: false
+    isLogged: false,
+    isLoading: false,
 }
 
 export const authSlice = createSlice({

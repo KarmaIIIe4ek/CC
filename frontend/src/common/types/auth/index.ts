@@ -5,20 +5,26 @@ export interface IPropsLogin<
     TContext = any,
     > {
     navigate: (to: string) => void
-    register: UseFormRegister<TFieldValues>
+    register: UseFormRegister<any>
     errors: FieldErrors<TFieldValues>
+    loading: boolean
 }
 
-export interface IPropsRegister {
-    setEmail: (value: string) => void
-    setPassword: (value: string) => void
-    setRepeatPassword: (value: string) => void
+export interface IPropsRegister<
+    TFieldValues extends FieldValues = FieldValues,
+    TContext = any,
+    > {
     navigate: (to: string) => void
+    register: UseFormRegister<any>
+    errors: FieldErrors<TFieldValues>
+    loading: boolean
+    samePasswords: boolean
 }
 
 export interface IAuthState {
     user: IPublicUser,
-    isLogged: boolean
+    isLogged: boolean,
+    isLoading: boolean,
 }
 
 export interface IPublicUser{
