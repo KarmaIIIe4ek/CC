@@ -32,6 +32,13 @@ export const useStyles = makeStyles((theme: Theme) => {
                 },
             },
         },
-    
+        active: {
+            backgroundColor: '#1900D5 !important',
+            color: "#FFFFFF !important",
+            borderRadius: '4px !important',
+            '& .MuiSvgIcon-root': {
+                color: `${colors.white.DEFAULT}`,
+            }
+        },
     })
 })

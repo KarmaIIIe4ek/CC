@@ -1,20 +1,20 @@
-import { AppBar, Box, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import React, { useContext } from "react";
+import { AppBar, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
+import React, { FC, useContext } from "react";
 import { useAppSelector } from "../../utils/hook";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
-import { ColorModeContext, tokens } from "../../theme";
+import { ColorModeContext } from "../../theme";
 import { useStyles } from "./styles";
 import { MenuOutlined } from "@mui/icons-material";
 import FlexBetween from "../flex-between";
+import { ITopBarProps } from "../../common/types/topbar";
 
-const TopBarComponent = (props: any) => {
+const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
     const { setSideBarIsOpen, sideBarIsOpen, isNonMobile } = props
     const user = useAppSelector(state => state.auth.user)
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
     const colorMode = useContext(ColorModeContext)
     const classes = useStyles()
     return (

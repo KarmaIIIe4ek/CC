@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Route, useLocation, useNavigate } from "react-router-dom";
+import React, { useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import RegisterPage from "./register";
 import LoginPage from "./login";
-import './style.scss'
 import { Box, useTheme } from "@mui/material";
 import { instance } from "../../../utils/axios";
 import { useAppDispatch, useAppSelector } from "../../../utils/hook";
 import { login } from "../../../store/slice/user/auth";
-import { AppErrors } from "../../../common/errors";
 import { tokens } from "../../../theme";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginSchema, RegisterSchema } from '../../../utils/yup'
+import { useStyles } from "./styles";
 
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
@@ -23,6 +22,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const navigate = useNavigate()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    const classes = useStyles()
     const {
         register,
         formState: { errors },
@@ -74,12 +74,10 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
             
         }
     }
-     
-    
 
     return(
-        <div className='root'>
-            <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
+        <div className={classes.root}>
+            <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display='flex'
                     justifyContent='center'
@@ -89,7 +87,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     margin='auto'
                     padding={3}
                     borderRadius={5}
-                    boxShadow={'5px 5px 10px #ccc'}
+                    boxShadow={'0px 0px 10px 1px #202020'}
                     bgcolor={colors.primary[500]}
                 >
                     {(location.pathname === '/user/login')

@@ -1,19 +1,18 @@
-import { Button, TextField, Typography } from "@mui/material";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import { TextField, Typography } from "@mui/material";
+import React from "react";
 import { IPropsLogin } from "../../../../common/types/auth";
-import { useTheme } from "@mui/styles";
-import { tokens } from "../../../../theme";
 import { useStyles } from "./styles";
+import AppButton from "../../../app_button";
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
     const { navigate, register, errors, loading } = props;
     const classes = useStyles()
     return (
         <>
-            <Typography variant="h2" fontFamily='Poppins' textAlign='center'>
+            <Typography variant="h2" textAlign='center' fontSize={32}>
                 Авторизация
             </Typography>
-            <Typography variant="body1" marginBottom={3} fontFamily='Poppins' textAlign='center'>
+            <Typography variant="body1" marginBottom={3} textAlign='center'>
                 Введите ваш логин и пароль
             </Typography>
 
@@ -40,9 +39,9 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 helperText={errors.password ? `${errors.password.message}` : ''}
                 {...register('password')}
             />
-            <Button type="submit" sx={{fontFamily:'Poppins', marginTop: 2, width: '60%'}} variant="contained" >Войти</Button>
-            <Typography variant="body1" sx={{fontFamily:'Poppins'}}>
-                У вас нет аккаунта? <span className="incitingText" onClick={() => navigate("/user/register")}>Регистрация</span>
+            <AppButton type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" >Войти</AppButton>
+            <Typography variant="body1" margin='10px 0px 0px 0px'>
+                У вас нет аккаунта? <span className={classes.incitingText} onClick={() => navigate("/user/register")}>Регистрация</span>
             </Typography>
         </>
     );

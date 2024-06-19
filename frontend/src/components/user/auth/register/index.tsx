@@ -1,16 +1,18 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 import { IPropsRegister } from "../../../../common/types/auth";
+import { useStyles } from "./styles";
+import AppButton from "../../../app_button";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-    
+    const classes = useStyles()
     const {navigate, register, errors, loading, samePasswords} = props
     return (
         <>
-            <Typography variant="h2" fontFamily='Poppins' textAlign='center'>
+            <Typography variant="h2" textAlign='center'>
                 Регистрация
             </Typography>
-            <Typography variant="body1" marginBottom={3} fontFamily='Poppins' textAlign='center'>
+            <Typography variant="body1" marginBottom={3} textAlign='center'>
                 Введите данные для регистрации
             </Typography>
             <TextField
@@ -45,12 +47,12 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 helperText={errors.repeatPassword ? `${errors.repeatPassword.message}` : ''}
                 {...register('repeatPassword')}
             />
-            {samePasswords ? <Typography variant="body1" fontFamily='Poppins' textAlign='left' color='red'>
+            {samePasswords ? <Typography variant="body1" textAlign='left' color='red'>
                 Пароли должны совпадать!
             </Typography>: <></>}
-            <Button type="submit" sx={{fontFamily:'Poppins', marginTop: 2, width: '60%'}} variant="contained" onClick={() => {}}>Регистрация</Button>
-            <Typography variant="body1" sx={{fontFamily:'Poppins'}}>
-                У вас уже есть аккаунт? <span className="incitingText" onClick={() => navigate("/user/login")}>Войти</span>
+            <AppButton type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" onClick={() => {}}>Регистрация</AppButton>
+            <Typography variant="body1" margin='10px 0px 0px 0px'>
+                У вас уже есть аккаунт? <span className={classes.incitingText} onClick={() => navigate("/user/login")}>Войти</span>
             </Typography>
         </>
     );
