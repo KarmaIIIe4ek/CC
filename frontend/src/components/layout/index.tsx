@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import TopBarComponent from "../top-bar";
 import { Outlet, useLocation } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
@@ -6,7 +6,7 @@ import { Box } from "@mui/system";
 import SideBarComponent from "../sidebar";
 import { useStyles } from "./styles";
 
-const LayoutComponent = () => {
+const LayoutComponent: FC = (): JSX.Element => {
     const [sideBarIsOpen, setSideBarIsOpen] = useState(true)
     const isNonMobile = useMediaQuery('(min-width:760px)')
     const location = useLocation()
@@ -18,7 +18,7 @@ const LayoutComponent = () => {
             <Box display={isNonMobile ? 'flex' : 'block'} justifyContent='space-between' width='100%' height='100%'>
                 <SideBarComponent
                     isNonMobile={isNonMobile}
-                    drowerWidth='250px'
+                    drawerWidth='250px'
                     sideBarIsOpen={sideBarIsOpen}
                     setSideBarIsOpen={setSideBarIsOpen}
                 />

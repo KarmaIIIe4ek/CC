@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Route, useLocation, useNavigate } from "react-router-dom";
+import React, { useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import RegisterPage from "./register";
 import LoginPage from "./login";
-import './style.scss'
 import { Box, useTheme } from "@mui/material";
 import { instance } from "../../../utils/axios";
-import { useAppDispatch } from "../../../utils/hook";
+import { useAppDispatch, useAppSelector } from "../../../utils/hook";
 import { login } from "../../../store/slice/user/auth";
-import { AppErrors } from "../../../common/errors";
 import { tokens } from "../../../theme";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { LoginSchema, RegisterSchema } from '../../../utils/yup'
+import { useStyles } from "./styles";
 
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
+    const [samePasswords, setSamePasswords] = useState(false)
     const location = useLocation();
     const apiUrlCreate = "auth/sign-up"
     const apiUrlLoggin = "auth/sign-in"
@@ -22,15 +22,27 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const navigate = useNavigate()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault()
+    const classes = useStyles()
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm({
+        resolver: yupResolver(
+            location.pathname === '/user/login' ? LoginSchema : RegisterSchema,
+        ),
+    })
+
+    const loading = useAppSelector((state) => state.auth.isLoading)
+
+    const handleSubmitForm = async (data: any) => {
         if (location.pathname === "/user/login") {
             try {
                 const userData = {
-                    email,
-                    password,
+                    email: data.email,
+                    password: data.password,
                 }
+                
                 const user = await instance.post(apiUrlLoggin, userData)
                 await dispatch(login(user.data))
                 navigate('/user/lk')
@@ -41,13 +53,13 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
             
 
         } else{
-            if (password === repeatPassword) {
+            if (data.password === data.repeatPassword) {
                 try {
                     const userData = {
-                        email,
-                        password,
+                        email: data.email,
+                        password: data.password,
                     }
-                    const createUser = await instance.post(apiUrlCreate, userData)
+                    await instance.post(apiUrlCreate, userData)
                     const user = await instance.post(apiUrlLoggin, userData)
                     await dispatch(login(user.data))
                     navigate('/user/lk')
@@ -55,21 +67,17 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     console.log(err)
                     return err
                 }
-                
-                
             }
             else {
-                throw new Error(AppErrors.PasswordDoNotMatch)
+                setSamePasswords(!samePasswords)
             }
             
         }
     }
-     
-    
 
     return(
-        <div className='root'>
-            <form className="form" onSubmit={handleSubmit}>
+        <div className={classes.root}>
+            <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display='flex'
                     justifyContent='center'
@@ -79,12 +87,22 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     margin='auto'
                     padding={3}
                     borderRadius={5}
-                    boxShadow={'5px 5px 10px #ccc'}
+                    boxShadow={'0px 0px 10px 1px #202020'}
                     bgcolor={colors.primary[500]}
                 >
                     {(location.pathname === '/user/login')
-                     ? <LoginPage setEmail={setEmail} setPassword={setPassword} navigate={navigate}/> : (location.pathname === '/user/register')
-                      ? <RegisterPage setEmail={setEmail} setPassword={setPassword} setRepeatPassword={setRepeatPassword} navigate={navigate}/> : null
+                     ? <LoginPage
+                      navigate={navigate}
+                      register={register} 
+                      errors={errors} 
+                      loading={loading}
+                      /> : (location.pathname === '/user/register') ? 
+                      <RegisterPage 
+                        navigate={navigate}
+                        register={register}
+                        errors={errors}
+                        loading={loading}
+                        samePasswords={samePasswords} /> : null
                       }
                 </Box>
             </form>

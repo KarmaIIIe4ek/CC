@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useStyles } from "./styles";
 import {
     Box,
@@ -13,29 +13,28 @@ import {
     useTheme,
 } from '@mui/material'
 import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material'
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { tokens } from "../../theme";
+import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "../flex-between";
 import { navMenu } from "../../common/moks/navigete";
 import CC from "../../assets/images/sidebar/CC.png"
+import { ISidebarProps } from "../../common/types/sidebar";
 
-const SideBarComponent = (props: any) => {
+const SideBarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
     const [active, setActive] = useState('')
     const {isNonMobile, drawerWidth, sideBarIsOpen, setSideBarIsOpen} = props
     const classes = useStyles()
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
-        setActive(pathname.substring(1))
+        setActive(pathname)
     }, [pathname])
 
     const renderNavMenu = navMenu.map((element): JSX.Element => {
         return (
             <ListItem key={element.id}>
-                <ListItemButton className={classes.navItem} onClick={() => navigate(`${element.path}`)}>
+                <ListItemButton className={active === ("/" + element.path) ? `${classes.navItem} ${classes.active}` : classes.navItem} onClick={() => navigate(`${element.path}`)}>
                     <ListItemIcon>
                         {element.icon}
                     </ListItemIcon>
@@ -66,7 +65,7 @@ const SideBarComponent = (props: any) => {
                             width: drawerWidth,
                         }
                     }}
-                >
+                >   
                     <Box className={classes.root}>
                         <Box>
                             <FlexBetween>
@@ -89,14 +88,14 @@ const SideBarComponent = (props: any) => {
                     </Box>
                     <Box width='100%'>
                         <List>
-                            <ListItem>
-                                <ListItemButton className={classes.navItem}>
+                            <ListItem >
+                                <ListItemButton className={`${classes.navItem}`}>
                                     <ListItemIcon>
                                         <LogoutOutlined />
                                     </ListItemIcon>
-                                    <ListItemIcon>
-                                        <Typography>Выйти</Typography>
-                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant="body1">Выход</Typography>
+                                    </ListItemText>
                                 </ListItemButton>
                             </ListItem>
                         </List>
