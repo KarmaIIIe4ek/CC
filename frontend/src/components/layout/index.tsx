@@ -12,7 +12,7 @@ const LayoutComponent: FC = (): JSX.Element => {
     const location = useLocation()
     const classes = useStyles()
     return (
-        location.pathname === '/user/login' || location.pathname === '/user/register' ? (
+        location.pathname === '/user/login' || location.pathname === '/user/register' || location.pathname === '/' ? (
             <><Outlet /></>
         ) : (
             <Box display={isNonMobile ? 'flex' : 'block'} justifyContent='space-between' width='100%' height='100%'>
@@ -22,7 +22,7 @@ const LayoutComponent: FC = (): JSX.Element => {
                     sideBarIsOpen={sideBarIsOpen}
                     setSideBarIsOpen={setSideBarIsOpen}
                 />
-                <Box className={classes.mainSection} >
+                <Box className={classes.mainSection} width={`${`calc(100% - ${isNonMobile && sideBarIsOpen ? '250px' : '0px'})`}`} >
                     <TopBarComponent setSideBarIsOpen={setSideBarIsOpen} sideBarIsOpen={sideBarIsOpen} isNonMobile={isNonMobile}/>
                     <Outlet />
                 </Box>
