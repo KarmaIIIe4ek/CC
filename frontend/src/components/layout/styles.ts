@@ -8,7 +8,6 @@ export const useStyles = makeStyles({
     },
     mainSection: {
         display: 'flex',
-        width: `${`calc(100% - 250px)`}`,
         flexDirection: 'column',
         justifyContent: 'center',
     },

@@ -3,6 +3,7 @@ import React from "react";
 import { IPropsLogin } from "../../../../common/types/auth";
 import { useStyles } from "./styles";
 import AppButton from "../../../app_button";
+import AppLoadingButton from "../../../app_loading_button";
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
     const { navigate, register, errors, loading } = props;
@@ -33,13 +34,13 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 type='password' 
                 margin="normal" 
                 id="outlined-basic" 
-                label="Password" 
+                label="Пароль" 
                 variant="outlined" 
                 placeholder="Введите ваш пароль" 
                 helperText={errors.password ? `${errors.password.message}` : ''}
                 {...register('password')}
             />
-            <AppButton type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" >Войти</AppButton>
+            <AppLoadingButton loading={loading} type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" >Войти</AppLoadingButton>
             <Typography variant="body1" margin='10px 0px 0px 0px'>
                 У вас нет аккаунта? <span className={classes.incitingText} onClick={() => navigate("/user/register")}>Регистрация</span>
             </Typography>

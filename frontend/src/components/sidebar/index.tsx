@@ -57,12 +57,12 @@ const SideBarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element 
                     variant="persistent"
                     anchor="left"
                     sx={{
-                        width: drawerWidth,
+                        width: (isNonMobile ? drawerWidth : drawerWidth + 32),
                         '& .MuiDrawer-paper': {
                             color: theme.palette.secondary.main,
                             backgroundColor: theme.palette.primary.main,
                             boxSizing: 'border-box',
-                            width: drawerWidth,
+                            width: (isNonMobile ? drawerWidth : drawerWidth + 32),
                         }
                     }}
                 >   

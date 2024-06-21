@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { IPropsRegister } from "../../../../common/types/auth";
 import { useStyles } from "./styles";
 import AppButton from "../../../app_button";
+import AppLoadingButton from "../../../app_loading_button";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
     const classes = useStyles()
@@ -30,7 +31,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 type="password"
                 fullWidth={true}
                 margin='normal'
-                label="Password"
+                label="Пароль"
                 variant="outlined"
                 placeholder="Введите ваш пароль"
                 helperText={errors.password ? `${errors.password.message}` : ''}
@@ -41,7 +42,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 type="password"
                 fullWidth={true}
                 margin='normal'
-                label="Password"
+                label="Повторите пароль"
                 variant="outlined"
                 placeholder="Повторите ваш пароль"
                 helperText={errors.repeatPassword ? `${errors.repeatPassword.message}` : ''}
@@ -50,7 +51,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
             {samePasswords ? <Typography variant="body1" textAlign='left' color='red'>
                 Пароли должны совпадать!
             </Typography>: <></>}
-            <AppButton type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" onClick={() => {}}>Регистрация</AppButton>
+            <AppLoadingButton loading={loading} type="submit" sx={{marginTop: 2, width: '60%'}} variant="contained" onClick={() => {}}>Регистрация</AppLoadingButton>
             <Typography variant="body1" margin='10px 0px 0px 0px'>
                 У вас уже есть аккаунт? <span className={classes.incitingText} onClick={() => navigate("/user/login")}>Войти</span>
             </Typography>

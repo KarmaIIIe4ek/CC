@@ -13,7 +13,6 @@ import { ITopBarProps } from "../../common/types/topbar";
 
 const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
     const { setSideBarIsOpen, sideBarIsOpen, isNonMobile } = props
-    const user = useAppSelector(state => state.auth.user)
     const theme = useTheme()
     const colorMode = useContext(ColorModeContext)
     const classes = useStyles()
@@ -24,6 +23,7 @@ const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => 
                     container
                     justifyContent="space-between"
                     alignItems="center"
+                    width="100%"
                 >
                     <Grid item sm={3} lg={3}>
                         <FlexBetween>
@@ -31,7 +31,7 @@ const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => 
                             className={classes.menuIcon}
                             onClick={() => setSideBarIsOpen(!sideBarIsOpen)}/> : <></>}
                             <Typography>
-                                {user ? `${user.email}` : ''}
+                                {sessionStorage.getItem('email') ? `${sessionStorage.getItem('email')}` : ''}
                             </Typography>
                         </FlexBetween>
                     </Grid>

@@ -32,3 +32,14 @@ export interface IPublicUser{
     password: string,
     token: string,
 }
+
+export interface ILoginData {
+    email: string
+    password: string
+}
+
+export interface IRegisterData {
+    email: string
+    password: string
+    repeatPassword: string
+}
