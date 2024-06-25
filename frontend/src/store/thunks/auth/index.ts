@@ -6,7 +6,7 @@ export const loginUser = createAsyncThunk(
     'auth/sign-in',
     async (data: ILoginData, {rejectWithValue}) => {
         try {
-            const user = await instance.post("auth/sign-in", data)
+            const user = await instance.post("/auth/sign-in", data)
             if (
                 user.data.status === 400 ||
                 user.data.status === 401 ||
@@ -35,14 +35,14 @@ export const registerUser = createAsyncThunk(
                 email: data.email,
                 password: data.password,
             }
-            const createNewUser = await instance.post("auth/sign-up", userData)
+            const createNewUser = await instance.post("/auth/sign-up", userData)
             if (
                 createNewUser.data.status === 400 ||
                 createNewUser.data.status === 401 ||
                 createNewUser.data.status === 500
             )
                 return
-            const user = await instance.post("auth/sign-in", userData)
+            const user = await instance.post("/auth/sign-in", userData)
             if (
                 user.data.status === 400 ||
                 user.data.status === 401 ||

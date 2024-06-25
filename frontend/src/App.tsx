@@ -12,6 +12,11 @@ import LayoutComponent from "./components/layout";
 import NewsComponent from "./components/news";
 import SettingsComponent from "./components/settings";
 import SubscribeComponent from "./components/subscribe";
+import ServicesComponent from "./components/services";
+import RatesComponent from "./components/rates";
+import MainComponent from "./components/main";
+import AboutComponent from "./components/about";
+import SupportComponent from "./components/support";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -21,9 +26,14 @@ function App() {
                 <CssBaseline/>
                     <div className="App">
                     <Routes>
+                        <Route element={<Home />}>
+                            <Route path="" element={<MainComponent />}/>
+                            <Route path="services" element={<ServicesComponent />}/>
+                            <Route path="rates" element={<RatesComponent />}/>
+                            <Route path="about" element={<AboutComponent />}/>
+                            <Route path="support" element={<SupportComponent />}/>
+                        </Route>
                         <Route element={<LayoutComponent/ >}>
-                            <Route path="/" element={<Home />}/>
-                            
                             <Route path="user/login" element={<AuthRootComponent />}/>
                             <Route path="user/register" element={<AuthRootComponent />}/>
                             <Route path="admin/login" element={<AdminAuthPage />} />
@@ -33,10 +43,10 @@ function App() {
                                 <Route path="user/lk/news" element={<NewsComponent />}/>
                                 <Route path="user/lk/settings" element={<SettingsComponent />}/>
                             </Route>
-                            <Route element={<PrivateRouteAdminAuth />}>
-                                <Route path="admin/lk" element={<AdminPage />}/>
-                            </Route>
                         </Route>
+                        <Route element={<PrivateRouteAdminAuth />}>
+                                <Route path="admin/lk" element={<AdminPage />}/>
+                                </Route>
                         
                         
                         </Routes>
