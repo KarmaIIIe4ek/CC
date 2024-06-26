@@ -34,7 +34,6 @@ export const useStyles = makeStyles((theme: Theme) => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px', 
-            padding: '0px 15px',
             cursor: 'pointer'
         },
         brandTitle: {

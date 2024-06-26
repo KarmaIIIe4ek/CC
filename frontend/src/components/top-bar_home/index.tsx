@@ -29,18 +29,19 @@ const TopBarHomeComponent = (): JSX.Element => {
                             justifyContent="flex-start"
                             item
                             >
-                            <Box className={classes.brand} onClick={() => navigate('')}>
+                            <Box className={classes.brand}  onClick={() => navigate('')}>
                             <img src={CC} alt="Logo image"/>
                             <Typography variant='h3' className={classes.brandTitle}>CoinsCheck</Typography>
                             </Box>
                         </Grid>
                             <Grid
                             display="flex"
-                            justifyContent="flex-between">
-                            <Typography variant='h5' className={classes.brand} onClick={() => navigate('services')}>Услуги</Typography>
-                            <Typography variant='h5' className={classes.brand} onClick={() => navigate('rates')}>Тарифы</Typography>
-                            <Typography variant='h5' className={classes.brand} onClick={() => navigate('about')}>О нас</Typography>
-                            <Typography variant='h5' className={classes.brand} onClick={() => navigate('support')}>Поддержка</Typography>
+                            justifyContent="flex-between"
+                            >
+                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('services')}>Услуги</Typography>
+                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('rates')}>Тарифы</Typography>
+                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('about')}>О нас</Typography>
+                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('support')}>Поддержка</Typography>
 
                         </Grid>
                               
