@@ -22,7 +22,7 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 fullWidth={true} 
                 margin="normal" 
                 id="outlined-basic" 
-                label="Email" 
+                label="Почта" 
                 variant="outlined" 
                 placeholder="Введите ваш email" 
                 helperText={errors.email ? `${errors.email.message}` : ''}

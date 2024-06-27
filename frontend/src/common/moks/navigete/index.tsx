@@ -19,9 +19,9 @@ export const navMenu = [
         id: 2,
     },
     {
-        name: 'Новости',
+        name: 'Документация',
         icon: <MenuBookOutlined/>,
-        path: 'user/lk/news',
+        path: 'user/lk/docs',
         id: 3,
     },
     {
