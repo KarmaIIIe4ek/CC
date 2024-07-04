@@ -61,12 +61,6 @@ func (r *CheckedAddressListPostgres) GetById(userId, listId int) (todo.CheckedAd
 	return list, err
 }
 
-func (r *CheckedAddressListPostgres) Delete(userId int, listId int) error {
-	query := fmt.Sprintf("DELETE FROM %s tl USING %s ul WHERE tl.id = ul.list_id AND ul.user_id=$1 AND ul.list_id=$2", checkedAddressTable, usersListsTable)
-	_, err := r.db.Exec(query, userId, listId)
-	return err
-}
-
 func (r *CheckedAddressListPostgres) Update(userId, listId int, input todo.UpdateListInput) error {
 	setValues := make([]string, 0)
 	args := make([]interface{}, 0)

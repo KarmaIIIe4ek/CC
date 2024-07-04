@@ -15,18 +15,23 @@ type CheckedAddressList interface {
 	Create(userId int, list todo.CheckedAddressList) (int, error)
 	GetAll(userId int) ([]todo.CheckedAddressList, error)
 	GetById(userId, id int) (todo.CheckedAddressList, error)
-	Delete(userId, listId int) error
 	Update(userId, listId int, input todo.UpdateListInput) error
+}
+
+type Admins interface {
+	GetAdmin(email, password string) (todo.Admin, error)
 }
 
 type Repository struct {
 	Autorization
 	CheckedAddressList
+	Admins
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Autorization:       NewAuthPostgres(db),
 		CheckedAddressList: NewCheckedAddressListPostgres(db),
+		Admins:             NewAdminsPostgres(db),
 	}
 }

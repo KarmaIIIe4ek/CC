@@ -41,8 +41,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			lists.GET("/", h.getAllList)
 			lists.GET("/:id", h.getListById)
 			lists.PUT("/:id", h.updateList)
-			lists.DELETE("/:id", h.deleteList)
 		}
+	}
+
+	admin := router.Group("/admin")
+	{
+		admin.POST("/sign-in", h.signInAdmin)
 	}
 
 	return router

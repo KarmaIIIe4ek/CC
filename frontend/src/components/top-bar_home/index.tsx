@@ -3,7 +3,7 @@ import React, { FC, useContext } from "react";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import CC from "../../assets/images/sidebar/CC.png"
+import CClogo from "../../assets/images/sidebar/ССlogo.png"
 import { ColorModeContext } from "../../theme";
 import { useStyles } from "./styles";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ const TopBarHomeComponent = (): JSX.Element => {
                             item
                             >
                             <Box className={classes.brand}  onClick={() => navigate('')}>
-                            <img src={CC} alt="Logo image"/>
+                            <img src={CClogo} alt="Logo image"/>
                             <Typography variant='h3' className={classes.brandTitle}>CoinsCheck</Typography>
                             </Box>
                         </Grid>

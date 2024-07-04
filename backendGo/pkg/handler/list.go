@@ -167,25 +167,3 @@ func (h *Handler) updateList(c *gin.Context) {
 // @Failure 500 {object} handler.errorResponse
 // @Failure default {object} handler.errorResponse
 // @Router /api/lists/:id [delete]
-func (h *Handler) deleteList(c *gin.Context) {
-	userId, err := getUserId(c)
-	if err != nil {
-		return
-	}
-
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
-
-	err = h.services.CheckedAddressList.Delete(userId, id)
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	c.JSON(http.StatusOK, statusResponse{
-		Status: "ok",
-	})
-}

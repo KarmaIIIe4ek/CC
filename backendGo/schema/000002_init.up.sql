@@ -17,3 +17,9 @@ CREATE TABLE users_list (
     user_id int references users (id) on delete cascade not null,
     list_id int references checked_address (id) on delete cascade not null
 );
+
+CREATE TABLE admins (
+    id serial not null unique,
+    email_admin varchar(255) not null unique,
+    password_hash_admin varchar(255) not null
+);

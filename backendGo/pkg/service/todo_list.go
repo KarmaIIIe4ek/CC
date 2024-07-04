@@ -25,10 +25,6 @@ func (s *CheckedAddressListService) GetById(userId, listId int) (todo.CheckedAdd
 	return s.repo.GetById(userId, listId)
 }
 
-func (s *CheckedAddressListService) Delete(userId, listId int) error {
-	return s.repo.Delete(userId, listId)
-}
-
 func (s *CheckedAddressListService) Update(userId, listId int, input todo.UpdateListInput) error {
 	if err := input.Validate(); err != nil {
 		return err

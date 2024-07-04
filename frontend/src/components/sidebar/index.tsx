@@ -16,7 +16,7 @@ import { ChevronLeftOutlined, LogoutOutlined } from '@mui/icons-material'
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "../flex-between";
 import { navMenu } from "../../common/moks/navigete";
-import CC from "../../assets/images/sidebar/CC.png"
+import CClogo from "../../assets/images/sidebar/ССlogo.png";
 import { ISidebarProps } from "../../common/types/sidebar";
 
 const SideBarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
@@ -70,7 +70,7 @@ const SideBarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element 
                         <Box>
                             <FlexBetween>
                                 <Box className={classes.brand} onClick={() => navigate('user/lk')}>
-                                    <img src={CC} alt="Logo image"/>
+                                    <img src={CClogo} alt="Logo image"/>
                                     <Typography variant='h4' className={classes.brandTitle}>
                                         CoinsCheck
                                         </Typography>
