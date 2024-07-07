@@ -70,7 +70,6 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 	}
 
 	return claims.UserId, nil
-
 }
 
 func generatePasswordHash(password string) string {

@@ -2,7 +2,9 @@ package handler
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,24 +15,24 @@ const (
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
-	// header := c.GetHeader(authorizationHeader)
-	// if header == "" {
-	// 	newErrorResponse(c, http.StatusUnauthorized, "empty authorization header")
-	// }
+	header := c.GetHeader(authorizationHeader)
+	if header == "" {
+		newErrorResponse(c, http.StatusUnauthorized, "empty authorization header")
+	}
 
-	// headerParts := strings.Split(header, " ")
-	// if len(headerParts) != 2 {
-	// 	newErrorResponse(c, http.StatusUnauthorized, "invalid authorization header")
-	// 	return
-	// }
+	headerParts := strings.Split(header, ".")
+	if len(headerParts) != 2 {
+		newErrorResponse(c, http.StatusUnauthorized, "invalid authorization header")
+		return
+	}
 
-	// userId, err := h.services.Autorization.ParseToken(headerParts[1])
-	// if err != nil {
-	// 	newErrorResponse(c, http.StatusUnauthorized, err.Error())
-	// }
+	userId, err := h.services.Autorization.ParseToken(headerParts[1])
+	if err != nil {
+		newErrorResponse(c, http.StatusUnauthorized, err.Error())
+	}
 
-	// fmt.Println(userId)
-	c.Set(userCtx, 4)
+	fmt.Println(userId)
+	c.Set(userCtx, userId)
 }
 
 func getUserId(c *gin.Context) (int, error) {

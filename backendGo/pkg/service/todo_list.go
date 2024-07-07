@@ -24,10 +24,3 @@ func (s *CheckedAddressListService) GetAll(userId int) ([]todo.CheckedAddressLis
 func (s *CheckedAddressListService) GetById(userId, listId int) (todo.CheckedAddressList, error) {
 	return s.repo.GetById(userId, listId)
 }
-
-func (s *CheckedAddressListService) Update(userId, listId int, input todo.UpdateListInput) error {
-	if err := input.Validate(); err != nil {
-		return err
-	}
-	return s.repo.Update(userId, listId, input)
-}

@@ -16,12 +16,13 @@ type CheckedAddressList interface {
 	Create(userId int, list todo.CheckedAddressList) (int, error)
 	GetAll(userId int) ([]todo.CheckedAddressList, error)
 	GetById(userId, listId int) (todo.CheckedAddressList, error)
-	Update(userId, listId int, input todo.UpdateListInput) error
 }
 
 type Admins interface {
+	CreateAdmin(admin todo.Admin) (todo.NewCreatedAdmin, error)
 	GenerateTokenAdmins(email, password string) (string, error)
 	ParseTokenAdmins(token string) (int, error)
+	GetAllUsers() ([]todo.UsersListForAdmin, error)
 }
 
 type Service struct {

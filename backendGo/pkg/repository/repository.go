@@ -15,11 +15,12 @@ type CheckedAddressList interface {
 	Create(userId int, list todo.CheckedAddressList) (int, error)
 	GetAll(userId int) ([]todo.CheckedAddressList, error)
 	GetById(userId, id int) (todo.CheckedAddressList, error)
-	Update(userId, listId int, input todo.UpdateListInput) error
 }
 
 type Admins interface {
 	GetAdmin(email, password string) (todo.Admin, error)
+	GetAllUsers() ([]todo.UsersListForAdmin, error)
+	CreateAdmin(admin todo.Admin) (todo.NewCreatedAdmin, error)
 }
 
 type Repository struct {
