@@ -38,10 +38,11 @@ const TopBarHomeComponent = (): JSX.Element => {
                             display="flex"
                             justifyContent="flex-between"
                             >
-                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('services')}>Услуги</Typography>
-                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('rates')}>Тарифы</Typography>
-                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('about')}>О нас</Typography>
-                            <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('support')}>Поддержка</Typography>
+                                <Typography variant='h5' className={classes.blockExplorer} padding="0px 15px" onClick={() => navigate('block-explorer')}>Блок-эксплорер</Typography>
+                                <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('services')}>Услуги</Typography>
+                                <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('rates')}>Тарифы</Typography>
+                                <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('about')}>О нас</Typography>
+                                <Typography variant='h5' className={classes.brand} padding="0px 15px" onClick={() => navigate('support')}>Поддержка</Typography>
 
                         </Grid>
                               
