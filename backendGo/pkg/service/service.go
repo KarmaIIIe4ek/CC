@@ -10,12 +10,14 @@ type Autorization interface {
 	GenerateToken(email, password string) (string, error)
 	ParseToken(token string) (int, error)
 	DeleteUser(email, hashPassword string) error
+	UserIsBlocked(userId int) (bool, error)
+	UserCanMakeCheck(userId int) (bool, error)
 }
 
 type CheckedAddressList interface {
 	Create(userId int, list todo.CheckedAddressList) (int, error)
-	GetAll(userId int) ([]todo.CheckedAddressList, error)
-	GetById(userId, listId int) (todo.CheckedAddressList, error)
+	GetAll(userId int) ([]todo.CheckedAddressListForResponse, error)
+	GetById(userId, listId int) (todo.CheckedAddressListForResponse, error)
 }
 
 type Admins interface {

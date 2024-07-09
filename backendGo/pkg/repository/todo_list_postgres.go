@@ -39,19 +39,19 @@ func (r *CheckedAddressListPostgres) Create(userId int, list todo.CheckedAddress
 	return id, tx.Commit()
 }
 
-func (r *CheckedAddressListPostgres) GetAll(userId int) ([]todo.CheckedAddressList, error) {
-	var lists []todo.CheckedAddressList
-	query := fmt.Sprintf("SELECT cha.id, cha.address, cha.title, cha.description, cha.risk_score FROM %s cha INNER JOIN %s ul on cha.id = ul.list_id WHERE ul.user_id = $1", checkedAddressTable, usersListsTable)
+func (r *CheckedAddressListPostgres) GetAll(userId int) ([]todo.CheckedAddressListForResponse, error) {
+	var lists []todo.CheckedAddressListForResponse
+	query := fmt.Sprintf("SELECT cha.id, cha.address, cha.title, cha.description, cha.risk_score, cha.created_at FROM %s cha INNER JOIN %s ul on cha.id = ul.list_id WHERE ul.user_id = $1", checkedAddressTable, usersListsTable)
 
 	err := r.db.Select(&lists, query, userId)
 
 	return lists, err
 }
 
-func (r *CheckedAddressListPostgres) GetById(userId, listId int) (todo.CheckedAddressList, error) {
-	var list todo.CheckedAddressList
+func (r *CheckedAddressListPostgres) GetById(userId, listId int) (todo.CheckedAddressListForResponse, error) {
+	var list todo.CheckedAddressListForResponse
 
-	query := fmt.Sprintf(`SELECT cha.id, cha.address, cha.title, cha.description, cha.risk_score FROM %s cha
+	query := fmt.Sprintf(`SELECT cha.id, cha.address, cha.title, cha.description, cha.risk_score, cha.created_at FROM %s cha
 	 INNER JOIN %s ul on cha.id = ul.list_id WHERE ul.user_id = $1 AND ul.list_id = $2`, checkedAddressTable, usersListsTable)
 
 	err := r.db.Get(&list, query, userId, listId)

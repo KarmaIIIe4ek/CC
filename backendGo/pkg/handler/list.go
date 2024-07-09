@@ -9,19 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Summary Create list
-// @Security ApiKeyAuth
-// @Tags lists
-// @Description create list
-// @ID create-list,
-// @Accept json
-// @Produce json
-// @Param input body todo.CheckedAddressList true "list info"
-// @Success 200 {integer} integer 1
-// @Failure 400 {object} handler.errorResponse
-// @Failure 500 {object} handler.errorResponse
-// @Failure default {object} handler.errorResponse
-// @Router /api/lists [post]
 func (h *Handler) createList(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -46,7 +33,7 @@ func (h *Handler) createList(c *gin.Context) {
 }
 
 type getAllListResponse struct {
-	Data []todo.CheckedAddressList `json:"data"`
+	Data []todo.CheckedAddressListForResponse `json:"data"`
 }
 
 func (h *Handler) getAllList(c *gin.Context) {

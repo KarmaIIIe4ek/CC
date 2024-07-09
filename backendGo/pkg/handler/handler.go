@@ -36,6 +36,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			lists.GET("/", h.getAllList)
 			lists.GET("/:id", h.getListById)
 		}
+		userIsValid := api.Group("/check-user")
+		{
+			userIsValid.GET("/is-not-blocked", h.UserIsBlocked)
+			userIsValid.GET("/is-can-make-check", h.UserCanMakeCheck)
+		}
 	}
 
 	admin := router.Group("/admin")

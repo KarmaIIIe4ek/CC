@@ -46,9 +46,8 @@ func (h *Handler) signIn(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"email":    input.Email,
-		"password": input.Password,
-		"token":    token,
+		"email": input.Email,
+		"token": token,
 	})
 }
 
@@ -70,4 +69,40 @@ func (h *Handler) signDelete(c *gin.Context) {
 		Status: "ok",
 	})
 
+}
+
+func (h *Handler) UserIsBlocked(c *gin.Context) {
+
+	userId, err := getUserId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	isBlocked, err := h.services.Autorization.UserIsBlocked(userId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"is_blocked": isBlocked,
+	})
+}
+
+func (h *Handler) UserCanMakeCheck(c *gin.Context) {
+
+	userId, err := getUserId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	isPosible, err := h.services.Autorization.UserCanMakeCheck(userId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"user_can_make_check": isPosible,
+	})
 }
