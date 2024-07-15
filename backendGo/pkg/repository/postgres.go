@@ -10,6 +10,7 @@ const (
 	usersTable          = "users"
 	checkedAddressTable = "checked_address"
 	usersListsTable     = "users_list"
+	adminsTable         = "admins"
 )
 
 type Config struct {

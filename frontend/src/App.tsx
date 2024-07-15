@@ -17,6 +17,7 @@ import RatesComponent from "./components/rates";
 import MainComponent from "./components/main";
 import AboutComponent from "./components/about";
 import SupportComponent from "./components/support";
+import BlockExplorerPageComponent from "./components/block-explorer";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -32,6 +33,7 @@ function App() {
                             <Route path="rates" element={<RatesComponent />}/>
                             <Route path="about" element={<AboutComponent />}/>
                             <Route path="support" element={<SupportComponent />}/>
+                            <Route path="block-explorer" element={<BlockExplorerPageComponent />}/>
                         </Route>
                         <Route element={<LayoutComponent/ >}>
                             <Route path="user/login" element={<AuthRootComponent />}/>

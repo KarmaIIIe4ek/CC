@@ -10,24 +10,33 @@ type Autorization interface {
 	GenerateToken(email, password string) (string, error)
 	ParseToken(token string) (int, error)
 	DeleteUser(email, hashPassword string) error
+	UserIsBlocked(userId int) (bool, error)
+	UserCanMakeCheck(userId int) (bool, error)
 }
 
 type CheckedAddressList interface {
 	Create(userId int, list todo.CheckedAddressList) (int, error)
-	GetAll(userId int) ([]todo.CheckedAddressList, error)
-	GetById(userId, listId int) (todo.CheckedAddressList, error)
-	Delete(userId, listId int) error
-	Update(userId, listId int, input todo.UpdateListInput) error
+	GetAll(userId int) ([]todo.CheckedAddressListForResponse, error)
+	GetById(userId, listId int) (todo.CheckedAddressListForResponse, error)
+}
+
+type Admins interface {
+	CreateAdmin(admin todo.Admin) (todo.NewCreatedAdmin, error)
+	GenerateTokenAdmins(email, password string) (string, error)
+	ParseTokenAdmins(token string) (int, error)
+	GetAllUsers() ([]todo.UsersListForAdmin, error)
 }
 
 type Service struct {
 	Autorization
 	CheckedAddressList
+	Admins
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Autorization:       NewAuthService(repos.Autorization),
 		CheckedAddressList: NewCheckedAddressListService(repos.CheckedAddressList),
+		Admins:             NewAuthAdminsService(repos.Admins),
 	}
 }

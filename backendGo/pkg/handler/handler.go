@@ -1,11 +1,8 @@
 package handler
 
 import (
-	_ "github.com/KarmaIIIe4ek/backendGo/docs"
 	"github.com/KarmaIIIe4ek/backendGo/pkg/service"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -24,8 +21,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	// config.AllowOrigins = []string{"http://localhost:3000"}
 	router.Use(CORSMiddleware())
 
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 	auth := router.Group("/auth")
 	{
 		auth.POST("sign-up", h.signUp)
@@ -40,8 +35,21 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			lists.POST("/", h.createList)
 			lists.GET("/", h.getAllList)
 			lists.GET("/:id", h.getListById)
-			lists.PUT("/:id", h.updateList)
-			lists.DELETE("/:id", h.deleteList)
+		}
+		userIsValid := api.Group("/check-user")
+		{
+			userIsValid.GET("/is-not-blocked", h.UserIsBlocked)
+			userIsValid.GET("/is-can-make-check", h.UserCanMakeCheck)
+		}
+	}
+
+	admin := router.Group("/admin")
+	{
+		admin.POST("/sign-up", h.signUpAdmin)
+		admin.POST("/sign-in", h.signInAdmin)
+		users := admin.Group("/check")
+		{
+			users.GET("/users", h.getAllUsers)
 		}
 	}
 

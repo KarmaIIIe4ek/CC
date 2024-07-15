@@ -36,6 +36,14 @@ export const useStyles = makeStyles((theme: Theme) => {
             gap: '10px', 
             cursor: 'pointer'
         },
+        blockExplorer: {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px', 
+            cursor: 'pointer',
+            WebkitTextStroke: '1px #1900D5',
+            fontSize: '1.7rem !important'
+        },
         brandTitle: {
             color: `${theme.palette.mode === 'dark' ? colors.white.DEFAULT : colors.black.DEFAULT}`,
         },

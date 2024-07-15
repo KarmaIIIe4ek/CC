@@ -17,21 +17,10 @@ func (s *CheckedAddressListService) Create(userId int, list todo.CheckedAddressL
 	return s.repo.Create(userId, list)
 }
 
-func (s *CheckedAddressListService) GetAll(userId int) ([]todo.CheckedAddressList, error) {
+func (s *CheckedAddressListService) GetAll(userId int) ([]todo.CheckedAddressListForResponse, error) {
 	return s.repo.GetAll(userId)
 }
 
-func (s *CheckedAddressListService) GetById(userId, listId int) (todo.CheckedAddressList, error) {
+func (s *CheckedAddressListService) GetById(userId, listId int) (todo.CheckedAddressListForResponse, error) {
 	return s.repo.GetById(userId, listId)
-}
-
-func (s *CheckedAddressListService) Delete(userId, listId int) error {
-	return s.repo.Delete(userId, listId)
-}
-
-func (s *CheckedAddressListService) Update(userId, listId int, input todo.UpdateListInput) error {
-	if err := input.Validate(); err != nil {
-		return err
-	}
-	return s.repo.Update(userId, listId, input)
 }

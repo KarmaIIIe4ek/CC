@@ -70,7 +70,6 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 	}
 
 	return claims.UserId, nil
-
 }
 
 func generatePasswordHash(password string) string {
@@ -82,4 +81,12 @@ func generatePasswordHash(password string) string {
 func (s *AuthService) DeleteUser(email, password string) error {
 	password = generatePasswordHash(password)
 	return s.repo.DeleteUser(email, password)
+}
+
+func (s *AuthService) UserIsBlocked(userId int) (bool, error) {
+	return s.repo.UserIsBlocked(userId)
+}
+
+func (s *AuthService) UserCanMakeCheck(userId int) (bool, error) {
+	return s.repo.UserCanMakeCheck(userId)
 }
