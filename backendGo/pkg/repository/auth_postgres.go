@@ -53,8 +53,7 @@ func (r *AuthPostgres) UserCanMakeCheck(userId int) (bool, error) {
 func (r *AuthPostgres) GetUser(email, password string) (todo.User, error) {
 	var user todo.User
 	query := fmt.Sprintf("SELECT id FROM %s WHERE email=$1 AND password_hash=$2", usersTable)
-	err := r.db.Select(&user, query, email, password)
-
+	err := r.db.Get(&user, query, email, password)
 	return user, err
 }
 

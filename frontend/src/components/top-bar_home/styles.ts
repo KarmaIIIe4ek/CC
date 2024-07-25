@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme: Theme) => {
         },
         toolbar: {
             justifyContent: 'spase-between',
-            padding: '10px 25px',
+            padding: '5px 25px',
         },
         icons: {
             paddingRight: '20px',
